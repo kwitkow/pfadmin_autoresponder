@@ -1,0 +1,37 @@
+{
+    "name": "kreapptivo/pfadmin_autoresponder",
+    "type": "roundcube-plugin",
+    "description": "Plugin that gives access to Autoresponder using postfix admin database",
+    "keywords": ["mail","reply","autoresponse","autoreply","pfa","postfixadmin"],
+    "homepage": "https://github.com/kreapptivo/pfadmin_autoresponder.git",
+    "license": "GPL-2.0",
+    "version": "3.0",
+    "authors": [
+
+        {
+            "name": "Pawel Muszynski",
+            "email": "pawel@prolin.pl",
+            "role": "Developer"
+        },
+        {
+            "name": "Grzegorz Marsza³ek",
+            "email": "graf0@post.pl",
+            "role": "Developer"
+        },
+        {
+            "name": "Moritz Wacker",
+            "email": "wackerm@users.noreply.github.com",
+            "role": "Contributor"
+        }
+    ],
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "http://plugins.roundcube.net"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "roundcube/plugin-installer": ">=0.1.3"
+    }
+}
