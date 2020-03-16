@@ -1,0 +1,8 @@
+<?php
+
+//DSN string to connect to postfix admin database
+$rcmail_config['db_pfadmin_autoresponder_dsn'] = 'mysql://user:password@localhost/postfixadmin';
+
+//Domain / Subdomain to use for autoresponder configuration
+$rcmail_config['vac_domain']='autoreply.vacations.example.org';
+?>
