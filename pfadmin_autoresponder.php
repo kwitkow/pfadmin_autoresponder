@@ -1,21 +1,15 @@
 <?php
 
 /**
- * Change hMailServer Autoresponder
+ * Roundcube plugin for Autoresponder using postfixadmin database
  *
- * Plugin that gives access to Autoresponder using postfixadmin database
- *
- * @version 2.0 - 31.07.2009
- * @author Pawel Muszynski pawel@prolin.pl
- * @author Grzegorz Marsza³ek graf0@post.pl
- * @website http://www.prolin.pl
+ * Originally created by Pawel Muszynski pawel@prolin.pl and Grzegorz Marszalek graf0@post.pl
  * @licence GNU GPL
  *
  * Requirements: Postfixadmin
  *
  * Changelog
- * 2.0 - 2012.07.27 - Fixed SQL, Larry skin comatible (thanks to Grzegorz Marsza³ek) 
- * 1.0 - 2009.07.31 - Initial release
+ * 1.0 - 2020.04.24 - Initial release, fixed database fields
  *
  **/
              
@@ -32,8 +26,8 @@ require_once('pfadmin_functions.php');
 class pfadmin_autoresponder extends rcube_plugin
 {
   public $task = 'settings';
-  private $sql_select = 'SELECT email,subject,body,active,UNIX_TIMESTAMP(activefrom) as activefrom, UNIX_TIMESTAMP(activeto) as activeto FROM vacation WHERE email = %u LIMIT 1;';
-  private $sql_update = 'INSERT INTO vacation (email, active, subject, body, activefrom ,activeto) values (%u, %o, %s, %m, FROM_UNIXTIME(%f), FROM_UNIXTIME(%d)) ON DUPLICATE KEY UPDATE active = %o, body = %m, activefrom=FROM_UNIXTIME(%f), activeto=FROM_UNIXTIME(%d);';
+  private $sql_select = 'SELECT email,subject,body,active,UNIX_TIMESTAMP(activefrom) as activefrom, UNIX_TIMESTAMP(activeuntil) as activeuntil FROM vacation WHERE email = %u LIMIT 1;';
+  private $sql_update = 'INSERT INTO vacation (email, active, subject, body, activefrom ,activeuntil) values (%u, %o, %s, %m, FROM_UNIXTIME(%f), FROM_UNIXTIME(%d)) ON DUPLICATE KEY UPDATE active = %o, body = %m, activefrom=FROM_UNIXTIME(%f), activeuntil=FROM_UNIXTIME(%d);';
   private $date_format_regexp = '/^\d{4}\/\d{2}\/\d{2}$/';
   
 
@@ -145,7 +139,7 @@ class pfadmin_autoresponder extends rcube_plugin
     $enabled     = $settings['active'];
     $subject     = $settings['subject'];
     $body        = $settings['body'];
-    $date        = $settings['activeto'];
+    $date        = $settings['activeuntil'];
     $datefrom    = $settings['activefrom'];
 
     //$date = str_replace("-","/",substr($date,0,10));

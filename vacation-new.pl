@@ -247,7 +247,7 @@ sub find_real_address {
       panic("possible infinite loop in find_real_address for <$email>. Check for alias loop\n");
    }
    my $realemail;
-   my $query = qq{SELECT email FROM vacation WHERE email=? and active=$db_true and (activefrom is null or (activefrom<=curdate() and activeto is null) or (activefrom<=curdate() and activeto>=curdate()))};
+   my $query = qq{SELECT email FROM vacation WHERE email=? and active=$db_true and (activefrom is null or (activefrom<=curdate() and activeuntil is null) or (activefrom<=curdate() and activeuntil>=curdate()))};
    my $stm = $dbh->prepare($query) or panic_prepare($query);
    $stm->execute($email) or panic_execute($query,"email='$email'");
    my $rv = $stm->rows;
@@ -265,7 +265,7 @@ sub find_real_address {
       if ($rv == 1) { 
          my @row = $stm->fetchrow_array;
          my $alias = $row[0];
-         $query = qq{SELECT email FROM vacation WHERE email=? and active=$db_true and (activefrom is null or (activefrom<=curdate() and activeto>=curdate()))};
+         $query = qq{SELECT email FROM vacation WHERE email=? and active=$db_true and (activefrom is null or (activefrom<=curdate() and activeuntil>=curdate()))};
          $stm = $dbh->prepare($query) or panic_prepare($query);
          $stm->execute($alias) or panic_prepare($query,"email='$alias'");
          $rv = $stm->rows;
