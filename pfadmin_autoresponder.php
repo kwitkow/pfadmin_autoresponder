@@ -12,14 +12,6 @@
  * 1.0 - 2020.04.24 - Initial release, fixed database fields
  *
  **/
-             
-
-/**
- *
- * #1- Configure "pfadmin_autoresponder/config/config.inc.php".
- * #3- Register plugin ("./config/main.inc.php ::: $rcmail_config['plugins']").
- *
- **/
 
 require_once('pfadmin_functions.php');
 
